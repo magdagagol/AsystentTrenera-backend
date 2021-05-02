@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AssistantTrainer/AssistantTrainer.iml" filepath="$PROJECT_DIR$/AssistantTrainer/AssistantTrainer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AsystentTrenera-backend.iml" filepath="$PROJECT_DIR$/.idea/AsystentTrenera-backend.iml" />
+    </modules>
+  </component>
+</project>
