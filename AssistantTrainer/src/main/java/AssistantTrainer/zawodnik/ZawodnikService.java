@@ -20,7 +20,10 @@ public class ZawodnikService {
     }
 
     public void addNewZawodnik(Zawodnik zawodnik) {
-        System.out.println(zawodnik);
         zawodnikRepository.save(zawodnik);
+    }
+
+    public void deleteById(Long id) {
+        zawodnikRepository.deleteById(id);
     }
 }

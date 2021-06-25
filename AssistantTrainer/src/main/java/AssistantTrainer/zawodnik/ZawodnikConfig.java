@@ -8,7 +8,7 @@ import java.util.List;
 
 @Configuration
 public class ZawodnikConfig {
-
+/*
     @Bean
     CommandLineRunner commandLineRunner(ZawodnikRepository repository){
         return args -> {
@@ -34,5 +34,5 @@ public class ZawodnikConfig {
                     List.of(Jan, Jan2, Jan3)
             );
         };
-    }
+    }*/
 }

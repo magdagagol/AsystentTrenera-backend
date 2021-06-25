@@ -1,5 +1,4 @@
 package AssistantTrainer.kyu;
-
 import org.springframework.boot.CommandLineRunner;
 
 import java.util.List;
