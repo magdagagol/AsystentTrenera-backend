@@ -29,8 +29,10 @@ public class ZawodnikController {
         zawodnikService.addNewZawodnik(zawodnik);
     }
 
-    @PostMapping
-    public Zawodnik updateZawodnik(@RequestBody Zawodnik zawodnik){
+    @PutMapping("/{id}")
+    public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
+        System.out.println("sssssssssssssssssss " + id);
+        zawodnikService.updateZawodnik(zawodnik, id);
         return null;
     }
 

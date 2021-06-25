@@ -23,6 +23,17 @@ public class ZawodnikService {
         zawodnikRepository.save(zawodnik);
     }
 
+    public void updateZawodnik(Zawodnik zawodnik, Long id) {
+        zawodnikRepository.findById(id).map( zaw -> {
+                    zaw.setImie(zawodnik.getImie());
+                    zaw.setNazwisko(zawodnik.getNazwisko());
+                    zaw.setRokUrodzenia(zawodnik.getRokUrodzenia());
+                    zaw.setEmail(zawodnik.getEmail());
+                    zaw.setNumerTelefonu(zawodnik.getNumerTelefonu());
+                    return zawodnikRepository.save(zaw);
+        });
+    }
+
     public void deleteById(Long id) {
         zawodnikRepository.deleteById(id);
     }
