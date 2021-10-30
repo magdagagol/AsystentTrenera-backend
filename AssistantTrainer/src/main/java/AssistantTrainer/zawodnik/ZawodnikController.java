@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/zawodnik")
-public class ZawodnikController {
+public class  ZawodnikController {
 
     private final ZawodnikService zawodnikService;
 
