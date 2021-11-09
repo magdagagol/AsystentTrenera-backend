@@ -1,6 +1,10 @@
 package AssistantTrainer.parent;
 
+import AssistantTrainer.zawodnik.Zawodnik;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -22,10 +26,26 @@ public class Parent {
     String email;
     Boolean contactAgree;
 
+    @ManyToMany
+    @JoinTable(
+            name="participant_enrolled",
+            joinColumns = @JoinColumn(name = "parent_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
+    private Set<Zawodnik> enrolledParticipants = new HashSet<>();
+
     public Parent() {}
 
     public Parent(Long id, String name, String surname, Integer phoneNumber, String email, Boolean contactAgree) {
         this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.contactAgree = contactAgree;
+    }
+
+    public Parent(String name, String surname, Integer phoneNumber, String email, Boolean contactAgree) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -80,4 +100,13 @@ public class Parent {
     public void setContactAgree(Boolean contactAgree) {
         this.contactAgree = contactAgree;
     }
+
+    public Set<Zawodnik> getEnrolledParticipants() {
+        return enrolledParticipants;
+    }
+
+    public void enrolledParticipants(Zawodnik zawodnik) {
+        enrolledParticipants.add(zawodnik);
+    }
+
 }

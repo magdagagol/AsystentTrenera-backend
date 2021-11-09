@@ -1,6 +1,11 @@
 package AssistantTrainer.zawodnik;
 
+import AssistantTrainer.parent.Parent;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -16,11 +21,16 @@ public class Zawodnik {
             generator = "student_sequence"
     )
     private Long id;
+
     private String imie;
     private String nazwisko;
     private String rokUrodzenia;
     private String email;
     private String numerTelefonu;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledParticipants")
+    private Set<Parent> parents = new HashSet<>();
 
     public Zawodnik(){}
 
@@ -88,6 +98,11 @@ public class Zawodnik {
     public void setNumerTelefonu(String numerTelefonu) {
         this.numerTelefonu = numerTelefonu;
     }
+
+    public Set<Parent> getParents() {
+        return parents;
+    }
+
 }
 /*
 {

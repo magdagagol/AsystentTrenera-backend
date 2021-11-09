@@ -29,15 +29,14 @@ public class  ZawodnikController {
         zawodnikService.addNewZawodnik(zawodnik);
     }
 
-   // @PutMapping("/{id}")
-   // public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
-   //     zawodnikService.updateZawodnik(zawodnik, id);
-   //     return null;
-   // }
+    @PutMapping("/{id}")
+    public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
+        zawodnikService.updateZawodnik(zawodnik, id);
+        return null;
+    }
 
     @DeleteMapping("/{id}")
     public void usunZawodnika(@PathVariable Long id) {
-        System.out.println("uuuuuuuuuuuuuuuuuu" + id);
         zawodnikService.deleteById(id);
     }
 }
