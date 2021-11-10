@@ -11,7 +11,7 @@ public class ParentService {
 
     public List<Parent> getParent(){ return parentRepository.findAll();}
 
-    public Parent getOneParent(Long id){return parentRepository.getOne(id);}
+    public Parent getOneParent(Long id){return parentRepository.findById(id).get();}
 
     public void addNewParent(Parent parent){
         parentRepository.save(parent);

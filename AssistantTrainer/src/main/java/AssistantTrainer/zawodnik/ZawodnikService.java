@@ -19,7 +19,7 @@ public class ZawodnikService {
         return zawodnikRepository.findAll();
     }
 
-    public Zawodnik getOneZawodnik(Long id){return zawodnikRepository.getOne(id);}
+    public Zawodnik getOneZawodnik(Long id){return zawodnikRepository.findById(id).get();}
 
     public void addNewZawodnik(Zawodnik zawodnik) {
         zawodnikRepository.save(zawodnik);
