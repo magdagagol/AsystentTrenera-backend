@@ -20,11 +20,11 @@ public class ParentController {
     }
 
    @GetMapping
-   public List<Parent> getParent(){return parentService.getParent();}
+   public List<Parent> getParent(){ return parentService.getParent(); }
 
    @PostMapping
-   public void addParent(@RequestBody Parent parent){parentService.addNewParent(parent);}
-
+   public void addParent(@RequestBody Parent parent){ parentService.addNewParent(parent); }
+/*
    @PutMapping("/{parentId}/zawodnik/{zawodnikId}")
    public Parent enrollZawodnikToParent(
             @PathVariable Long parentId,
@@ -35,7 +35,7 @@ public class ParentController {
         parent.enrolledParticipants(zawodnik);
         return parentService.save(parent);
    }
-
+*/
    @DeleteMapping
     public void delete(@PathVariable Long id){
         parentService.deleteByParentId(id);

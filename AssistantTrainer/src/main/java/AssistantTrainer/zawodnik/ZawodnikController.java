@@ -32,8 +32,7 @@ public class  ZawodnikController {
 
     @PutMapping("/{id}")
     public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
-        zawodnikService.updateZawodnik(zawodnik, id);
-        return null;
+        return zawodnikService.updateZawodnik(zawodnik, id);
     }
 
     @PutMapping("/{zawodnikId}/kyu/{kyuId}")

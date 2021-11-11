@@ -1,7 +1,6 @@
 package AssistantTrainer.zawodnik;
 
 
-import AssistantTrainer.parent.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class ZawodnikService {
         zawodnikRepository.save(zawodnik);
     }
 
-    public void updateZawodnik(Zawodnik zawodnik, Long id) {
+    public Zawodnik updateZawodnik(Zawodnik zawodnik, Long id) {
         zawodnikRepository.findById(id).map( zaw -> {
                     zaw.setImie(zawodnik.getImie());
                     zaw.setNazwisko(zawodnik.getNazwisko());
@@ -35,6 +34,7 @@ public class ZawodnikService {
                     zaw.setNumerTelefonu(zawodnik.getNumerTelefonu());
                     return zawodnikRepository.save(zaw);
         });
+        return zawodnik;
     }
 
     public Zawodnik save(Zawodnik zawodnik){return zawodnikRepository.save(zawodnik);}
