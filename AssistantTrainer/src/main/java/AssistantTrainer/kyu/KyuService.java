@@ -1,5 +1,6 @@
 package AssistantTrainer.kyu;
 
+import AssistantTrainer.zawodnik.Zawodnik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,12 @@ public class KyuService {
         return kyuRepository.findAll();
     }
 
+    public Kyu getOneKyu(Long id){ return kyuRepository.findById(id).get(); }
+
     public void addNewKyu(Kyu kyu){
         System.out.println(kyu);
         kyuRepository.save(kyu);
     }
+
+    public Kyu save(Kyu kyu){ return kyuRepository.save(kyu); }
 }

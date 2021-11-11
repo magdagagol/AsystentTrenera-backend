@@ -1,5 +1,6 @@
 package AssistantTrainer.zawodnik;
 
+import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,6 +32,9 @@ public class Zawodnik {
     @JsonIgnore
     @ManyToMany(mappedBy = "enrolledParticipants")
     private Set<Parent> parents = new HashSet<>();
+
+    @OneToMany(mappedBy = "zawodnik")
+    private Set<Kyu> kyu;
 
     public Zawodnik(){}
 
@@ -102,7 +106,6 @@ public class Zawodnik {
     public Set<Parent> getParents() {
         return parents;
     }
-
 }
 /*
 {

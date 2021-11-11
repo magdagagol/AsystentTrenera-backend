@@ -1,6 +1,7 @@
 package AssistantTrainer.zawodnik;
 
 
+import AssistantTrainer.parent.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,8 @@ public class ZawodnikService {
                     return zawodnikRepository.save(zaw);
         });
     }
+
+    public Zawodnik save(Zawodnik zawodnik){return zawodnikRepository.save(zawodnik);}
 
     public void deleteById(Long id) {
         zawodnikRepository.deleteById(id);

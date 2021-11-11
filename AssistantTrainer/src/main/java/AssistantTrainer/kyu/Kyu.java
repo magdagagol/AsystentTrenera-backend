@@ -1,6 +1,12 @@
 package AssistantTrainer.kyu;
 
+import AssistantTrainer.zawodnik.Zawodnik;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table
@@ -18,6 +24,10 @@ public class Kyu {
     private Long id;
     private String dataEgzaminu;
     private String stopienKyu;
+
+    @ManyToOne
+    @JoinColumn(name = "zawodnik_id")
+    private Zawodnik zawodnik;
 
     public Kyu() {
     }
@@ -55,6 +65,14 @@ public class Kyu {
 
     public void setStopienKyu(String stopienKyu) {
         this.stopienKyu = stopienKyu;
+    }
+
+    public Zawodnik getZawodnik() {
+        return zawodnik;
+    }
+
+    public void assignZawodnik(Zawodnik zawodnik) {
+        this.zawodnik = zawodnik;
     }
 }
 /*

@@ -1,9 +1,8 @@
 package AssistantTrainer.zawodnik;
 
-import javassist.NotFoundException;
+import AssistantTrainer.kyu.Kyu;
+import AssistantTrainer.kyu.KyuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +12,12 @@ import java.util.List;
 public class  ZawodnikController {
 
     private final ZawodnikService zawodnikService;
+    private final KyuService kyuService;
 
     @Autowired
-    public ZawodnikController(ZawodnikService zawodnikService) {
+    public ZawodnikController(ZawodnikService zawodnikService, KyuService kyuService) {
         this.zawodnikService = zawodnikService;
+        this.kyuService = kyuService;
     }
 
     @GetMapping
@@ -33,6 +34,17 @@ public class  ZawodnikController {
     public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
         zawodnikService.updateZawodnik(zawodnik, id);
         return null;
+    }
+
+    @PutMapping("/{zawodnikId}/kyu/{kyuId}")
+    public Kyu enrollZawodnikToKyu(
+            @PathVariable Long zawodnikId,
+            @PathVariable Long kyuId
+    ) {
+        Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        Kyu kyu = kyuService.getOneKyu(kyuId);
+        kyu.assignZawodnik(zawodnik);
+        return kyuService.save(kyu);
     }
 
     @DeleteMapping("/{id}")
