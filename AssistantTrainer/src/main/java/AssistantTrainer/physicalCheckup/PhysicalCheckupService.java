@@ -23,7 +23,7 @@ public class PhysicalCheckupService {
             p.setPhysicalCheckupData(physicalCheckup.getPhysicalCheckupData());
             p.setHeight(physicalCheckup.getHeight());
             p.setWeight(physicalCheckup.getWeight());
-            p.setComment(physicalCheckup.comment);
+            p.setComment(physicalCheckup.getComment());
             return physicalCheckupRepository.save(p);
         });
         return physicalCheckup;

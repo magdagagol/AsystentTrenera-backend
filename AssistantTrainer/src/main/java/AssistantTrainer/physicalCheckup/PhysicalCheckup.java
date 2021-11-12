@@ -1,5 +1,7 @@
 package AssistantTrainer.physicalCheckup;
 
+import AssistantTrainer.zawodnik.Zawodnik;
+
 import javax.persistence.*;
 import javax.xml.crypto.Data;
 import java.util.Date;
@@ -20,8 +22,13 @@ public class PhysicalCheckup {
     Long id;
     Date physicalCheckupData;
     Float height;
+
     Float weight;
     String comment;
+
+    @ManyToOne
+    @JoinColumn(name = "zawodnik_id")
+    private Zawodnik zawodnik;
 
     public PhysicalCheckup() {}
 
@@ -71,5 +78,13 @@ public class PhysicalCheckup {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Zawodnik getZawodnik() {
+        return zawodnik;
+    }
+
+    public void assignZawodnik(Zawodnik zawodnik) {
+        this.zawodnik = zawodnik;
     }
 }
