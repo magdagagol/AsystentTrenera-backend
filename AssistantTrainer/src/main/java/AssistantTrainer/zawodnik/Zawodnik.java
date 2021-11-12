@@ -2,6 +2,7 @@ package AssistantTrainer.zawodnik;
 
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
+import AssistantTrainer.physicalCheckup.PhysicalCheckup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -34,7 +35,10 @@ public class Zawodnik {
     private Set<Parent> parents = new HashSet<>();
 
     @OneToMany(mappedBy = "zawodnik")
-    private Set<Kyu> kyu;
+    private Set<Kyu> kyu = new HashSet<>();
+
+    @OneToMany(mappedBy = "zawodnik")
+    private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
     public Zawodnik(){}
 

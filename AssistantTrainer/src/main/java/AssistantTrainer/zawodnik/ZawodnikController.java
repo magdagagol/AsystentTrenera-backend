@@ -2,6 +2,8 @@ package AssistantTrainer.zawodnik;
 
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.kyu.KyuService;
+import AssistantTrainer.physicalCheckup.PhysicalCheckup;
+import AssistantTrainer.physicalCheckup.PhysicalCheckupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +15,13 @@ public class  ZawodnikController {
 
     private final ZawodnikService zawodnikService;
     private final KyuService kyuService;
+    private final PhysicalCheckupService physicalCheckupService;
 
     @Autowired
-    public ZawodnikController(ZawodnikService zawodnikService, KyuService kyuService) {
+    public ZawodnikController(ZawodnikService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService) {
         this.zawodnikService = zawodnikService;
         this.kyuService = kyuService;
+        this.physicalCheckupService = physicalCheckupService;
     }
 
     @GetMapping
@@ -44,6 +48,17 @@ public class  ZawodnikController {
         Kyu kyu = kyuService.getOneKyu(kyuId);
         kyu.assignZawodnik(zawodnik);
         return kyuService.save(kyu);
+    }
+
+    @PutMapping("/{zawodnikId}/checkup/{checkupId}")
+    public PhysicalCheckup enrollZawodnikToPhysicalCheckup(
+            @PathVariable Long zawodnikId,
+            @PathVariable Long checkupId
+    ) {
+        Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        PhysicalCheckup physicalCheckup = physicalCheckupService.getOne(checkupId);
+        physicalCheckup.assignZawodnik(zawodnik);
+        return physicalCheckupService.save(physicalCheckup);
     }
 
     @DeleteMapping("/{id}")
