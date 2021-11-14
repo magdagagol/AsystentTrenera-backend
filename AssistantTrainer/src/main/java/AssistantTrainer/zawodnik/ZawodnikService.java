@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ZawodnikService {
@@ -18,6 +19,8 @@ public class ZawodnikService {
     public List<Zawodnik> getZawodnik(){
         return zawodnikRepository.findAll();
     }
+
+    public Optional<Zawodnik> findById(Long id){ return zawodnikRepository.findById(id); }
 
     public Zawodnik getOneZawodnik(Long id){return zawodnikRepository.findById(id).get();}
 

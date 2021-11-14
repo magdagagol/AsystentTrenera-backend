@@ -1,5 +1,6 @@
 package AssistantTrainer.zawodnik;
 
+import AssistantTrainer.exception.ApiRequestException;
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.kyu.KyuService;
 import AssistantTrainer.physicalCheckup.PhysicalCheckup;
@@ -44,6 +45,9 @@ public class  ZawodnikController {
             @PathVariable Long zawodnikId,
             @PathVariable Long kyuId
     ) {
+        if(zawodnikService.findById(zawodnikId).isEmpty() || kyuService.findById(kyuId).isEmpty()){
+            throw new ApiRequestException("Nie można przypisać zawodnika do stopnia kyu");
+        }
         Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
         Kyu kyu = kyuService.getOneKyu(kyuId);
         kyu.assignZawodnik(zawodnik);
@@ -55,8 +59,12 @@ public class  ZawodnikController {
             @PathVariable Long zawodnikId,
             @PathVariable Long checkupId
     ) {
+        if(zawodnikService.findById(zawodnikId).isEmpty() || physicalCheckupService.findById(checkupId).isEmpty()){
+        throw new ApiRequestException("Nie można przypisać zawodnika do badania");
+    }
         Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
         PhysicalCheckup physicalCheckup = physicalCheckupService.getOne(checkupId);
+
         physicalCheckup.assignZawodnik(zawodnik);
         return physicalCheckupService.save(physicalCheckup);
     }

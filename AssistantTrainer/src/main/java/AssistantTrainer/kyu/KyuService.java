@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KyuService {
@@ -18,6 +19,8 @@ public class KyuService {
     public List<Kyu> getKyu(){
         return kyuRepository.findAll();
     }
+
+    public Optional<Kyu> findById(Long id){ return kyuRepository.findById(id); }
 
     public Kyu getOneKyu(Long id){ return kyuRepository.findById(id).get(); }
 

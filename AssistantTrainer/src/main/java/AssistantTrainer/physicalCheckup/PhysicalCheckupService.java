@@ -3,6 +3,7 @@ package AssistantTrainer.physicalCheckup;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhysicalCheckupService {
@@ -15,6 +16,8 @@ public class PhysicalCheckupService {
     public PhysicalCheckup save(PhysicalCheckup physicalCheckup){ return physicalCheckupRepository.save(physicalCheckup); }
 
     public List<PhysicalCheckup> getAll(){ return physicalCheckupRepository.findAll(); }
+
+    public Optional<PhysicalCheckup> findById(Long id){ return physicalCheckupRepository.findById(id); }
 
     public PhysicalCheckup getOne(Long id){ return physicalCheckupRepository.findById(id).get(); }
 
