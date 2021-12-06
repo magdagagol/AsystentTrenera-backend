@@ -14,13 +14,13 @@ import java.util.Set;
 public class Participant {
     @Id
     @SequenceGenerator(
-            name = "zawodnik_sequence",
-            sequenceName = "zawodnik_sequence",
+            name = "participant_sequence",
+            sequenceName = "participant_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "participant_sequence"
     )
     private Long id;
 
@@ -34,10 +34,10 @@ public class Participant {
     @ManyToMany(mappedBy = "enrolledParticipants")
     private Set<Parent> parents = new HashSet<>();
 
-    @OneToMany(mappedBy = "zawodnik")
+    @OneToMany(mappedBy = "participant")
     private Set<Kyu> kyu = new HashSet<>();
 
-    @OneToMany(mappedBy = "zawodnik")
+    @OneToMany(mappedBy = "participant")
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
     public Participant(){}

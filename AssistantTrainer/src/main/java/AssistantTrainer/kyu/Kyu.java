@@ -23,8 +23,8 @@ public class Kyu {
     private String stopienKyu;
 
     @ManyToOne
-    @JoinColumn(name = "zawodnik_id")
-    private Participant zawodnik;
+    @JoinColumn(name = "participant_id")
+    private Participant participant;
 
     public Kyu() {
     }
@@ -64,12 +64,12 @@ public class Kyu {
         this.stopienKyu = stopienKyu;
     }
 
-    public Participant getZawodnik() {
-        return zawodnik;
+    public Participant getParticipant() {
+        return participant;
     }
 
-    public void assignZawodnik(Participant zawodnik) {
-        this.zawodnik = zawodnik;
+    public void assignZawodnik(Participant participant) {
+        this.participant = participant;
     }
 }
 /*

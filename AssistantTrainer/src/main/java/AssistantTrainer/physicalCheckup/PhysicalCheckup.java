@@ -26,8 +26,8 @@ public class PhysicalCheckup {
     String comment;
 
     @ManyToOne
-    @JoinColumn(name = "zawodnik_id")
-    private Participant zawodnik;
+    @JoinColumn(name = "participant_id")
+    private Participant participant;
 
     public PhysicalCheckup() {}
 
@@ -79,11 +79,11 @@ public class PhysicalCheckup {
         this.comment = comment;
     }
 
-    public Participant getZawodnik() {
-        return zawodnik;
+    public Participant getParticipant() {
+        return participant;
     }
 
-    public void assignZawodnik(Participant zawodnik) {
-        this.zawodnik = zawodnik;
+    public void assignZawodnik(Participant participant) {
+        this.participant = participant;
     }
 }
