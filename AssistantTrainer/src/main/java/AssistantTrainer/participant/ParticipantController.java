@@ -1,4 +1,4 @@
-package AssistantTrainer.zawodnik;
+package AssistantTrainer.participant;
 
 import AssistantTrainer.exception.ApiRequestException;
 import AssistantTrainer.kyu.Kyu;
@@ -12,31 +12,31 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/zawodnik")
-public class  ZawodnikController {
+public class ParticipantController {
 
-    private final ZawodnikService zawodnikService;
+    private final ParticipantService zawodnikService;
     private final KyuService kyuService;
     private final PhysicalCheckupService physicalCheckupService;
 
     @Autowired
-    public ZawodnikController(ZawodnikService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService) {
+    public ParticipantController(ParticipantService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService) {
         this.zawodnikService = zawodnikService;
         this.kyuService = kyuService;
         this.physicalCheckupService = physicalCheckupService;
     }
 
     @GetMapping
-    public List<Zawodnik> getZawodnik(){
+    public List<Participant> getZawodnik(){
         return zawodnikService.getZawodnik();
     }
 
     @PostMapping
-    public void dodajZawodnika(@RequestBody Zawodnik zawodnik){
+    public void dodajZawodnika(@RequestBody Participant zawodnik){
         zawodnikService.addNewZawodnik(zawodnik);
     }
 
     @PutMapping("/{id}")
-    public Zawodnik edytujZawodnika(@RequestBody Zawodnik zawodnik, @PathVariable Long id){
+    public Participant edytujZawodnika(@RequestBody Participant zawodnik, @PathVariable Long id){
         return zawodnikService.updateZawodnik(zawodnik, id);
     }
 
@@ -48,7 +48,7 @@ public class  ZawodnikController {
         if(zawodnikService.findById(zawodnikId).isEmpty() || kyuService.findById(kyuId).isEmpty()){
             throw new ApiRequestException("Nie można przypisać zawodnika do stopnia kyu");
         }
-        Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        Participant zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
         Kyu kyu = kyuService.getOneKyu(kyuId);
         kyu.assignZawodnik(zawodnik);
         return kyuService.save(kyu);
@@ -62,7 +62,7 @@ public class  ZawodnikController {
         if(zawodnikService.findById(zawodnikId).isEmpty() || physicalCheckupService.findById(checkupId).isEmpty()){
         throw new ApiRequestException("Nie można przypisać zawodnika do badania");
     }
-        Zawodnik zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        Participant zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
         PhysicalCheckup physicalCheckup = physicalCheckupService.getOne(checkupId);
 
         physicalCheckup.assignZawodnik(zawodnik);

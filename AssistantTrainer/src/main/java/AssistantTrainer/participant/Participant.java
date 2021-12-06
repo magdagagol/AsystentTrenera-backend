@@ -1,4 +1,4 @@
-package AssistantTrainer.zawodnik;
+package AssistantTrainer.participant;
 
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Zawodnik {
+public class Participant {
     @Id
     @SequenceGenerator(
             name = "zawodnik_sequence",
@@ -40,9 +40,9 @@ public class Zawodnik {
     @OneToMany(mappedBy = "zawodnik")
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
-    public Zawodnik(){}
+    public Participant(){}
 
-    public Zawodnik(Long id, String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
+    public Participant(Long id, String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -51,7 +51,7 @@ public class Zawodnik {
         this.numerTelefonu = numerTelefonu;
     }
 
-    public Zawodnik(String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
+    public Participant(String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.rokUrodzenia = rokUrodzenia;

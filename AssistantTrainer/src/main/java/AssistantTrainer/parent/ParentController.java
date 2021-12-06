@@ -1,7 +1,6 @@
 package AssistantTrainer.parent;
 
-import AssistantTrainer.zawodnik.Zawodnik;
-import AssistantTrainer.zawodnik.ZawodnikService;
+import AssistantTrainer.participant.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +10,12 @@ import java.util.List;
 @RequestMapping(path = "api/parent")
 public class ParentController {
     private final ParentService parentService;
-    private final ZawodnikService zawodnikService;
+    private final ParticipantService zawodnikService;
 
     @Autowired
-    public ParentController(ParentService parentService, ZawodnikService zawodnikService) {
+    public ParentController(ParentService parentService, ParticipantService participantService) {
         this.parentService = parentService;
-        this.zawodnikService = zawodnikService;
+        this.zawodnikService = participantService;
     }
 
    @GetMapping

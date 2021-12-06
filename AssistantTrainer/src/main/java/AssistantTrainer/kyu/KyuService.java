@@ -1,6 +1,5 @@
 package AssistantTrainer.kyu;
 
-import AssistantTrainer.zawodnik.Zawodnik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

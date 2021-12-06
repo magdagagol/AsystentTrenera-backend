@@ -1,4 +1,4 @@
-package AssistantTrainer.zawodnik;
+package AssistantTrainer.participant;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,27 +8,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ZawodnikService {
-    private final ZawodnikRepository zawodnikRepository;
+public class ParticipantService {
+    private final ParticipantRepository zawodnikRepository;
 
     @Autowired
-    public ZawodnikService(ZawodnikRepository zawodnikRepository) {
-        this.zawodnikRepository = zawodnikRepository;
+    public ParticipantService(ParticipantRepository participantRepository) {
+        this.zawodnikRepository = participantRepository;
     }
 
-    public List<Zawodnik> getZawodnik(){
+    public List<Participant> getZawodnik(){
         return zawodnikRepository.findAll();
     }
 
-    public Optional<Zawodnik> findById(Long id){ return zawodnikRepository.findById(id); }
+    public Optional<Participant> findById(Long id){ return zawodnikRepository.findById(id); }
 
-    public Zawodnik getOneZawodnik(Long id){return zawodnikRepository.findById(id).get();}
+    public Participant getOneZawodnik(Long id){return zawodnikRepository.findById(id).get();}
 
-    public void addNewZawodnik(Zawodnik zawodnik) {
+    public void addNewZawodnik(Participant zawodnik) {
         zawodnikRepository.save(zawodnik);
     }
 
-    public Zawodnik updateZawodnik(Zawodnik zawodnik, Long id) {
+    public Participant updateZawodnik(Participant zawodnik, Long id) {
         zawodnikRepository.findById(id).map( zaw -> {
                     zaw.setImie(zawodnik.getImie());
                     zaw.setNazwisko(zawodnik.getNazwisko());
@@ -40,7 +40,7 @@ public class ZawodnikService {
         return zawodnik;
     }
 
-    public Zawodnik save(Zawodnik zawodnik){return zawodnikRepository.save(zawodnik);}
+    public Participant save(Participant zawodnik){return zawodnikRepository.save(zawodnik);}
 
     public void deleteById(Long id) {
         zawodnikRepository.deleteById(id);

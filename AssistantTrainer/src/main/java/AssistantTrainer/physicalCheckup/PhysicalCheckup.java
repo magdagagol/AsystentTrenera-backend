@@ -1,9 +1,8 @@
 package AssistantTrainer.physicalCheckup;
 
-import AssistantTrainer.zawodnik.Zawodnik;
+import AssistantTrainer.participant.Participant;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Entity
@@ -28,7 +27,7 @@ public class PhysicalCheckup {
 
     @ManyToOne
     @JoinColumn(name = "zawodnik_id")
-    private Zawodnik zawodnik;
+    private Participant zawodnik;
 
     public PhysicalCheckup() {}
 
@@ -80,11 +79,11 @@ public class PhysicalCheckup {
         this.comment = comment;
     }
 
-    public Zawodnik getZawodnik() {
+    public Participant getZawodnik() {
         return zawodnik;
     }
 
-    public void assignZawodnik(Zawodnik zawodnik) {
+    public void assignZawodnik(Participant zawodnik) {
         this.zawodnik = zawodnik;
     }
 }

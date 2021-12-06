@@ -1,6 +1,6 @@
 package AssistantTrainer.parent;
 
-import AssistantTrainer.zawodnik.Zawodnik;
+import AssistantTrainer.participant.Participant;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class Parent {
             joinColumns = @JoinColumn(name = "parent_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
-    private Set<Zawodnik> enrolledParticipants = new HashSet<>();
+    private Set<Participant> enrolledParticipants = new HashSet<>();
 
     public Parent() {}
 
@@ -101,12 +101,12 @@ public class Parent {
         this.contactAgree = contactAgree;
     }
 
-    public Set<Zawodnik> getEnrolledParticipants() {
+    public Set<Participant> getEnrolledParticipants() {
         return enrolledParticipants;
     }
 
-    public void enrolledParticipants(Zawodnik zawodnik) {
-        enrolledParticipants.add(zawodnik);
+    public void enrolledParticipants(Participant participant) {
+        enrolledParticipants.add(participant);
     }
 
 }
