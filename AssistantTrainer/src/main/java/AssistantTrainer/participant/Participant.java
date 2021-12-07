@@ -24,11 +24,11 @@ public class Participant {
     )
     private Long id;
 
-    private String imie;
-    private String nazwisko;
-    private String rokUrodzenia;
+    private String name;
+    private String surname;
+    private String yearOfBirth;
     private String email;
-    private String numerTelefonu;
+    private String phoneNumber;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "enrolledParticipants")
@@ -42,21 +42,27 @@ public class Participant {
 
     public Participant(){}
 
-    public Participant(Long id, String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
         this.id = id;
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.rokUrodzenia = rokUrodzenia;
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
         this.email = email;
-        this.numerTelefonu = numerTelefonu;
+        this.phoneNumber = phoneNumber;
+        this.parents = parents;
+        this.kyu = kyu;
+        this.physicalCheckups = physicalCheckups;
     }
 
-    public Participant(String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.rokUrodzenia = rokUrodzenia;
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
         this.email = email;
-        this.numerTelefonu = numerTelefonu;
+        this.phoneNumber = phoneNumber;
+        this.parents = parents;
+        this.kyu = kyu;
+        this.physicalCheckups = physicalCheckups;
     }
 
     public Long getId() {
@@ -67,28 +73,28 @@ public class Participant {
         this.id = id;
     }
 
-    public String getImie() {
-        return imie;
+    public String getName() {
+        return name;
     }
 
-    public void setImie(String imie) {
-        this.imie = imie;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNazwisko() {
-        return nazwisko;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getRokUrodzenia() {
-        return rokUrodzenia;
+    public String getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setRokUrodzenia(String rokUrodzenia) {
-        this.rokUrodzenia = rokUrodzenia;
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
     public String getEmail() {
@@ -99,16 +105,36 @@ public class Participant {
         this.email = email;
     }
 
-    public String getNumerTelefonu() {
-        return numerTelefonu;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setNumerTelefonu(String numerTelefonu) {
-        this.numerTelefonu = numerTelefonu;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<Parent> getParents() {
         return parents;
+    }
+
+    public void setParents(Set<Parent> parents) {
+        this.parents = parents;
+    }
+
+    public Set<Kyu> getKyu() {
+        return kyu;
+    }
+
+    public void setKyu(Set<Kyu> kyu) {
+        this.kyu = kyu;
+    }
+
+    public Set<PhysicalCheckup> getPhysicalCheckups() {
+        return physicalCheckups;
+    }
+
+    public void setPhysicalCheckups(Set<PhysicalCheckup> physicalCheckups) {
+        this.physicalCheckups = physicalCheckups;
     }
 }
 /*

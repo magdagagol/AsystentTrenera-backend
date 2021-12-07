@@ -30,11 +30,11 @@ public class ParticipantService {
 
     public Participant updateZawodnik(Participant zawodnik, Long id) {
         zawodnikRepository.findById(id).map( zaw -> {
-                    zaw.setImie(zawodnik.getImie());
-                    zaw.setNazwisko(zawodnik.getNazwisko());
-                    zaw.setRokUrodzenia(zawodnik.getRokUrodzenia());
+                    zaw.setName(zawodnik.getName());
+                    zaw.setSurname(zawodnik.getSurname());
+                    zaw.setYearOfBirth(zawodnik.getYearOfBirth());
                     zaw.setEmail(zawodnik.getEmail());
-                    zaw.setNumerTelefonu(zawodnik.getNumerTelefonu());
+                    zaw.setPhoneNumber(zawodnik.getPhoneNumber());
                     return zawodnikRepository.save(zaw);
         });
         return zawodnik;
