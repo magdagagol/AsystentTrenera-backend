@@ -1,6 +1,7 @@
 package AssistantTrainer.kyu;
 
 import AssistantTrainer.participant.Participant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -22,8 +23,9 @@ public class Kyu {
     private String dataEgzaminu;
     private String stopienKyu;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "participant_id")
+    //@JoinColumn(name = "participant_id")
     private Participant participant;
 
     public Kyu() {
@@ -68,8 +70,11 @@ public class Kyu {
         return participant;
     }
 
-    public void assignZawodnik(Participant participant) {
+    public void setParticipant(Participant participant) {
         this.participant = participant;
+    }
+
+    public void assignZawodnik(Participant zawodnik) { this.participant = zawodnik;
     }
 }
 /*

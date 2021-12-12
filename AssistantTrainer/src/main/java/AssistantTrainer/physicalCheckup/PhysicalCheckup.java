@@ -1,6 +1,7 @@
 package AssistantTrainer.physicalCheckup;
 
 import AssistantTrainer.participant.Participant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class PhysicalCheckup {
     Float weight;
     String comment;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "participant_id")
     private Participant participant;

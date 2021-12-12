@@ -1,6 +1,7 @@
 package AssistantTrainer.parent;
 
 import AssistantTrainer.participant.Participant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,13 +27,9 @@ public class Parent {
     String email;
     Boolean contactAgree;
 
-    @ManyToMany
-    @JoinTable(
-            name="participant_enrolled",
-            joinColumns = @JoinColumn(name = "parent_id"),
-            inverseJoinColumns = @JoinColumn(name = "participant_id")
-    )
-    private Set<Participant> enrolledParticipants = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledParents")
+    private Set<Participant> participantList = new HashSet<>();
 
     public Parent() {}
 
@@ -101,12 +98,12 @@ public class Parent {
         this.contactAgree = contactAgree;
     }
 
-    public Set<Participant> getEnrolledParticipants() {
-        return enrolledParticipants;
+    public Set<Participant> getParticipantList() {
+        return participantList;
     }
 
-    public void enrolledParticipants(Participant participant) {
-        enrolledParticipants.add(participant);
+    public void setParticipantList(Set<Participant> participantList) {
+        this.participantList = participantList;
     }
 
 }

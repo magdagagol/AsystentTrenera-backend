@@ -30,37 +30,41 @@ public class Participant {
     private String email;
     private String phoneNumber;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "enrolledParticipants")
-    private Set<Parent> parents = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name="parent_enrolled",
+            joinColumns = @JoinColumn(name = "participant_id"),
+            inverseJoinColumns = @JoinColumn(name = "parent_id")
+    )
+    private Set<Parent> enrolledParents = new HashSet<>();
 
     @OneToMany(mappedBy = "participant")
     private Set<Kyu> kyu = new HashSet<>();
-
+    
     @OneToMany(mappedBy = "participant")
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
     public Participant(){}
 
-    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> enrolledParents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.parents = parents;
+        this.enrolledParents = enrolledParents;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
     }
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> enrolledParents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.parents = parents;
+        this.enrolledParents = enrolledParents;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
     }
@@ -113,12 +117,12 @@ public class Participant {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Parent> getParents() {
-        return parents;
+    public Set<Parent> getEnrolledParents() {
+        return enrolledParents;
     }
 
-    public void setParents(Set<Parent> parents) {
-        this.parents = parents;
+    public void setEnrolledParents(Set<Parent> enrolledParents) {
+        this.enrolledParents = enrolledParents;
     }
 
     public Set<Kyu> getKyu() {
@@ -136,6 +140,12 @@ public class Participant {
     public void setPhysicalCheckups(Set<PhysicalCheckup> physicalCheckups) {
         this.physicalCheckups = physicalCheckups;
     }
+
+    public void enrolledParents(Parent parent) {
+        enrolledParents.add(parent);
+    }
+
+    public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
 }
 /*
 {

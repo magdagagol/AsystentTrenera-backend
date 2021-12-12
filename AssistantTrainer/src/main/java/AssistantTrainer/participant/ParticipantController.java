@@ -3,6 +3,8 @@ package AssistantTrainer.participant;
 import AssistantTrainer.exception.ApiRequestException;
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.kyu.KyuService;
+import AssistantTrainer.parent.Parent;
+import AssistantTrainer.parent.ParentService;
 import AssistantTrainer.physicalCheckup.PhysicalCheckup;
 import AssistantTrainer.physicalCheckup.PhysicalCheckupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +17,16 @@ import java.util.List;
 public class ParticipantController {
 
     private final ParticipantService zawodnikService;
+    private  final ParentService parentService;
     private final KyuService kyuService;
     private final PhysicalCheckupService physicalCheckupService;
 
     @Autowired
-    public ParticipantController(ParticipantService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService) {
+    public ParticipantController(ParticipantService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService, ParentService parentService) {
         this.zawodnikService = zawodnikService;
         this.kyuService = kyuService;
         this.physicalCheckupService = physicalCheckupService;
+        this.parentService = parentService;
     }
 
     @GetMapping
@@ -38,6 +42,17 @@ public class ParticipantController {
     @PutMapping("/{id}")
     public Participant edytujZawodnika(@RequestBody Participant zawodnik, @PathVariable Long id){
         return zawodnikService.updateZawodnik(zawodnik, id);
+    }
+
+    @PutMapping("/{participantId}/parent/{parentId}")
+    public Participant enrollZawodnikToParent(
+            @PathVariable Long participantId,
+            @PathVariable Long parentId
+    ) {
+        Participant participant = zawodnikService.getOneZawodnik(participantId);
+        Parent parent = parentService.getOneParent(parentId);
+        participant.enrolledParents(parent);
+        return zawodnikService.save(participant);
     }
 
     @PutMapping("/{zawodnikId}/kyu/{kyuId}")
