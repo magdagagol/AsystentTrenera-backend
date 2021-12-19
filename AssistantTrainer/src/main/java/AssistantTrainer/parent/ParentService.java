@@ -23,7 +23,7 @@ public class ParentService {
         parentRepository.save(parent);
     }
 
-    public void updateParent(Parent parent, Long id){
+    public Parent updateParent(Parent parent, Long id){
         parentRepository.findById(id).map(p -> {
             p.setName(parent.getName());
             p.setSurname(parent.getSurname());
@@ -32,6 +32,7 @@ public class ParentService {
             p.setContactAgree(parent.getContactAgree());
             return parentRepository.save(p);
         });
+        return parent;
     }
 
     public void deleteByParentId(Long id){parentRepository.deleteById(id);}

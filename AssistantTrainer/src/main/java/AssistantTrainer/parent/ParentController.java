@@ -22,6 +22,11 @@ public class ParentController {
    @GetMapping
    public List<Parent> getParent(){ return parentService.getParent(); }
 
+   @PutMapping("/{id}")
+   public Parent edit(@RequestBody Parent parent, @PathVariable Long id){
+        return parentService.updateParent(parent, id);
+   }
+
    @PostMapping
    public void addParent(@RequestBody Parent parent){ parentService.addNewParent(parent); }
 

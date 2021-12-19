@@ -23,7 +23,7 @@ public class Parent {
     Long id;
     String name;
     String surname;
-    Integer phoneNumber;
+    String phoneNumber;
     String email;
     Boolean contactAgree;
 
@@ -33,7 +33,7 @@ public class Parent {
 
     public Parent() {}
 
-    public Parent(Long id, String name, String surname, Integer phoneNumber, String email, Boolean contactAgree) {
+    public Parent(Long id, String name, String surname, String phoneNumber, String email, Boolean contactAgree) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +42,7 @@ public class Parent {
         this.contactAgree = contactAgree;
     }
 
-    public Parent(String name, String surname, Integer phoneNumber, String email, Boolean contactAgree) {
+    public Parent(String name, String surname, String phoneNumber, String email, Boolean contactAgree) {
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -74,11 +74,11 @@ public class Parent {
         this.surname = surname;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
