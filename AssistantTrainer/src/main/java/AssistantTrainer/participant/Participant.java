@@ -1,9 +1,11 @@
 package AssistantTrainer.participant;
 
+import AssistantTrainer.group.ParticipantGroup;
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
 import AssistantTrainer.physicalCheckup.PhysicalCheckup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -43,6 +45,10 @@ public class Participant {
     
     @OneToMany(mappedBy = "participant")
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private ParticipantGroup participantGroup;
 
     public Participant(){}
 
@@ -146,6 +152,14 @@ public class Participant {
     }
 
     public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
+
+    public ParticipantGroup getParticipantGroup() {
+        return participantGroup;
+    }
+
+    public void setParticipantGroup(ParticipantGroup participantGroup) {
+        this.participantGroup = participantGroup;
+    }
 }
 /*
 {
