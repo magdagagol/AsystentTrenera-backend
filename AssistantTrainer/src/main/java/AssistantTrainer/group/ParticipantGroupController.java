@@ -41,6 +41,6 @@ public class ParticipantGroupController {
         return participantService.save(participant);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){ groupService.delete(id); }
 }
