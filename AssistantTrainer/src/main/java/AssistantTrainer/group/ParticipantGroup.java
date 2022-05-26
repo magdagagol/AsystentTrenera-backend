@@ -23,11 +23,11 @@ public class ParticipantGroup {
     private Long id;
     private String name;
 
-   // @JsonIgnore
+    @JsonIgnore
     @OneToMany(
             mappedBy = "participantGroup",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+            cascade = CascadeType.ALL)
+    //@JoinColumn(name = "group_id")
     private Set<Participant> participants = new HashSet<>();
 
     public Long getId() {

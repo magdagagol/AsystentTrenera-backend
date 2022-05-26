@@ -30,7 +30,7 @@ public class ParticipantGroupController {
         return groupService.update(participantGroup, id);
     }
 
-    @PutMapping("/{groupId}/zawodnik/{participantId}")
+/*    @PutMapping("/{groupId}/zawodnik/{participantId}")
     public Participant addParticipantToGroup(
             @PathVariable Long groupId,
             @PathVariable Long participantId
@@ -40,7 +40,7 @@ public class ParticipantGroupController {
         participant.setParticipantGroup(participantGroup);
         return participantService.save(participant);
     }
-
+*/
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){ groupService.delete(id); }
 }

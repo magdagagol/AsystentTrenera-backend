@@ -1,12 +1,16 @@
 package AssistantTrainer.participant;
 
 import AssistantTrainer.exception.ApiRequestException;
+import AssistantTrainer.group.ParticipantGroup;
+import AssistantTrainer.group.ParticipantGroupService;
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.kyu.KyuService;
 import AssistantTrainer.parent.Parent;
 import AssistantTrainer.parent.ParentService;
 import AssistantTrainer.physicalCheckup.PhysicalCheckup;
 import AssistantTrainer.physicalCheckup.PhysicalCheckupService;
+import org.apache.catalina.Group;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +24,15 @@ public class ParticipantController {
     private  final ParentService parentService;
     private final KyuService kyuService;
     private final PhysicalCheckupService physicalCheckupService;
+    private final ParticipantGroupService participantGroupService;
 
     @Autowired
-    public ParticipantController(ParticipantService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService, ParentService parentService) {
+    public ParticipantController(ParticipantService zawodnikService, KyuService kyuService, PhysicalCheckupService physicalCheckupService, ParentService parentService, ParticipantGroupService participantGroupService) {
         this.zawodnikService = zawodnikService;
         this.kyuService = kyuService;
         this.physicalCheckupService = physicalCheckupService;
         this.parentService = parentService;
+        this.participantGroupService = participantGroupService;
     }
 
     @GetMapping
@@ -87,5 +93,33 @@ public class ParticipantController {
     @DeleteMapping("/{id}")
     public void usunZawodnika(@PathVariable Long id) {
         zawodnikService.deleteById(id);
+    }
+
+    @GetMapping("/group/{id}")
+    public List<Participant> getParticipantsWithGroup(@PathVariable Long id){
+        return zawodnikService.findParticipantWithGroup(id);
+    }
+
+    @GetMapping("/withoutGroup/{id}")
+    public List<Participant> getParticipantsWithoutGroup(@PathVariable Long id){
+        return zawodnikService.findParticipantWithoutGroup(id);
+    }
+
+    @PutMapping("/{participantId}/withGroup/{groupId}")
+    public Participant enrollParticipantToGroup(
+            @PathVariable Long participantId,
+            @PathVariable Long groupId
+    ) {
+        Participant participant = zawodnikService.getOneZawodnik(participantId);
+        ParticipantGroup participantGroup = participantGroupService.getOneGroup(groupId);
+        participant.setParticipantGroup(participantGroup);
+        return zawodnikService.save(participant);
+    }
+
+    @PutMapping("/{participantId}/withGroup/null")
+    public Participant enrollParticipantRemoveGroup(@PathVariable Long participantId) {
+        Participant participant = zawodnikService.getOneZawodnik(participantId);
+        participant.setParticipantGroup(null);
+        return zawodnikService.save(participant);
     }
 }

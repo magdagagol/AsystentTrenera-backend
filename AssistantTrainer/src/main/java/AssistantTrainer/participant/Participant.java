@@ -47,7 +47,8 @@ public class Participant {
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JoinColumn(name = "group_id", nullable = true)
+    //@JsonIgnore
     private ParticipantGroup participantGroup;
 
     public Participant(){}

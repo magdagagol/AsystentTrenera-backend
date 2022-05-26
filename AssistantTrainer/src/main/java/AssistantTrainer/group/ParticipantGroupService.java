@@ -1,5 +1,6 @@
 package AssistantTrainer.group;
 
+import AssistantTrainer.parent.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,6 @@ public class ParticipantGroupService {
     }
 
     public void delete(Long id){ participantGroupRepository.deleteById(id); }
+
+    public ParticipantGroup getOneGroup(Long id){ return participantGroupRepository.findById(id).get(); }
 }
