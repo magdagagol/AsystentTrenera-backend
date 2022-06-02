@@ -90,6 +90,16 @@ public class ParticipantController {
         return physicalCheckupService.save(physicalCheckup);
     }
 
+    @PutMapping("/{zawodnikId}/checkup")
+    public PhysicalCheckup addZawodnikToPhysicalCheckup(
+            @PathVariable Long zawodnikId,
+            @RequestBody PhysicalCheckup physicalCheckup
+    ) {
+        Participant zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        physicalCheckup.assignZawodnik(zawodnik);
+        return physicalCheckupService.save(physicalCheckup);
+    }
+
     @DeleteMapping("/{id}")
     public void usunZawodnika(@PathVariable Long id) {
         zawodnikService.deleteById(id);

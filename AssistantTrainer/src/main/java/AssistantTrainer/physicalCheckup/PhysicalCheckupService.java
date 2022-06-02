@@ -1,5 +1,6 @@
 package AssistantTrainer.physicalCheckup;
 
+import AssistantTrainer.participant.Participant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public class PhysicalCheckupService {
     }
 
     public void deleteById(Long id){ physicalCheckupRepository.deleteById(id); }
+
+    public List<PhysicalCheckup> findPhysicalCheckupWithParticipant(Long id) { return physicalCheckupRepository.findPhysicalCheckupWithParticipant(id); }
 }

@@ -1,6 +1,7 @@
 package AssistantTrainer.physicalCheckup;
 
 import AssistantTrainer.participant.Participant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class PhysicalCheckup {
             generator = "physicalCheckup_sequence"
     )
     Long id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     Date physicalCheckupData;
     Float height;
 
