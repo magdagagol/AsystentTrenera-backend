@@ -28,5 +28,18 @@ public class KyuService {
         kyuRepository.save(kyu);
     }
 
+    public Kyu update(Kyu kyu, Long id){
+        kyuRepository.findById(id).map(k -> {
+            k.setExamDate(kyu.getExamDate());
+            k.setKyuDegree(kyu.getKyuDegree());
+            return kyuRepository.save(k);
+        });
+        return kyu;
+    }
+
     public Kyu save(Kyu kyu){ return kyuRepository.save(kyu); }
+
+    public void deleteById(Long id){ kyuRepository.deleteById(id);}
+
+    public List<Kyu> findKyuWithParticipant(Long id){ return kyuRepository.findKyuWithParticipant(id);}
 }

@@ -1,9 +1,11 @@
 package AssistantTrainer.kyu;
 
 import AssistantTrainer.participant.Participant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -20,8 +22,9 @@ public class Kyu {
             generator = "kyu_sequence"
     )
     private Long id;
-    private String dataEgzaminu;
-    private String stopienKyu;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date examDate;
+    private String kyuDegree;
 
     @JsonIgnore
     @ManyToOne
@@ -31,39 +34,35 @@ public class Kyu {
     public Kyu() {
     }
 
-    public Kyu(Long id, String dataEgzaminu, String stopienKyu) {
+    public Kyu(Long id, Date examDate, String kyuDegree) {
         this.id = id;
-        this.dataEgzaminu = dataEgzaminu;
-        this.stopienKyu = stopienKyu;
+        this.examDate = examDate;
+        this.kyuDegree = kyuDegree;
     }
 
-    public Kyu(String dataEgzaminu, String stopienKyu) {
-        this.dataEgzaminu = dataEgzaminu;
-        this.stopienKyu = stopienKyu;
+    public Kyu(Date examDate, String kyuDegree) {
+        this.examDate = examDate;
+        this.kyuDegree = kyuDegree;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Date getExamDate() {
+        return examDate;
     }
 
-    public String getDataEgzaminu() {
-        return dataEgzaminu;
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
     }
 
-    public void setDataEgzaminu(String dataEgzaminu) {
-        this.dataEgzaminu = dataEgzaminu;
+    public String getKyuDegree() {
+        return kyuDegree;
     }
 
-    public String getStopienKyu() {
-        return stopienKyu;
-    }
-
-    public void setStopienKyu(String stopienKyu) {
-        this.stopienKyu = stopienKyu;
+    public void setKyuDegree(String kyuDegree) {
+        this.kyuDegree = kyuDegree;
     }
 
     public Participant getParticipant() {
@@ -74,12 +73,5 @@ public class Kyu {
         this.participant = participant;
     }
 
-    public void assignZawodnik(Participant zawodnik) { this.participant = zawodnik;
-    }
+    public void assignZawodnik(Participant participant) { this.participant = participant; }
 }
-/*
-{
-    "dataEgzaminu": "123",
-    "stopienKyu": "zolty"
-}
- */
