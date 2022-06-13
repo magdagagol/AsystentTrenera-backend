@@ -30,8 +30,17 @@ public class ParentController {
    @PostMapping
    public void addParent(@RequestBody Parent parent){ parentService.addNewParent(parent); }
 
-   @DeleteMapping
+   @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         parentService.deleteByParentId(id);
    }
+
+    @DeleteMapping("/{parent_id}/participant/{participant_id}")
+    public void delete(@PathVariable Long parent_id, @PathVariable Long participant_id){
+        System.out.println("participant id: " + participant_id);
+        Parent parent = parentService.getOneParent(parent_id);
+        Participant participant = zawodnikService.getOneZawodnik(participant_id);
+
+        parentService.delete(parent, participant);
+    }
 }

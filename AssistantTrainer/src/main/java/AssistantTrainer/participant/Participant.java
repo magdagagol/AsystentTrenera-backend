@@ -32,7 +32,7 @@ public class Participant {
     private String email;
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="parent_enrolled",
             joinColumns = @JoinColumn(name = "participant_id"),

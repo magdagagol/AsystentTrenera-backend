@@ -1,5 +1,6 @@
 package AssistantTrainer.parent;
 
+import AssistantTrainer.participant.Participant;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +36,11 @@ public class ParentService {
         return parent;
     }
 
-    public void deleteByParentId(Long id){parentRepository.deleteById(id);}
+    public void deleteByParentId(Long id){
+        parentRepository.deleteById(id);}
+
+    public void delete(Parent parent, Participant participant){
+        parent.getParticipantList().remove(participant);
+        participant.getEnrolledParents().remove(parent);
+    }
 }

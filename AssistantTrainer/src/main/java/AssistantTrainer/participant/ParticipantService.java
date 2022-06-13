@@ -25,7 +25,9 @@ public class ParticipantService {
 
     public Optional<Participant> findById(Long id){ return zawodnikRepository.findById(id); }
 
-    public Participant getOneZawodnik(Long id){return zawodnikRepository.findById(id).get();}
+    public Participant getOneZawodnik(Long id){
+        System.out.println("participant id: " + id);
+        return zawodnikRepository.findById(id).get();}
 
     public void addNewZawodnik(Participant zawodnik) {
         zawodnikRepository.save(zawodnik);
