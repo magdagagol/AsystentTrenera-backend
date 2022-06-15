@@ -40,10 +40,10 @@ public class Participant {
     )
     private Set<Parent> enrolledParents = new HashSet<>();
 
-    @OneToMany(mappedBy = "participant")
+    @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<Kyu> kyu = new HashSet<>();
     
-    @OneToMany(mappedBy = "participant")
+    @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
