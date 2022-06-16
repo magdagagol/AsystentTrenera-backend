@@ -35,12 +35,4 @@ public class ParentController {
         parentService.deleteByParentId(id);
    }
 
-    @DeleteMapping("/{parent_id}/participant/{participant_id}")
-    public void delete(@PathVariable Long parent_id, @PathVariable Long participant_id){
-        System.out.println("participant id: " + participant_id);
-        Parent parent = parentService.getOneParent(parent_id);
-        Participant participant = zawodnikService.getOneZawodnik(participant_id);
-
-        parentService.delete(parent, participant);
-    }
 }

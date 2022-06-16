@@ -1,5 +1,6 @@
 package AssistantTrainer.participant;
 
+import AssistantTrainer.attendance.Attendance;
 import AssistantTrainer.group.ParticipantGroup;
 import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
@@ -32,13 +33,8 @@ public class Participant {
     private String email;
     private String phoneNumber;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name="parent_enrolled",
-            joinColumns = @JoinColumn(name = "participant_id"),
-            inverseJoinColumns = @JoinColumn(name = "parent_id")
-    )
-    private Set<Parent> enrolledParents = new HashSet<>();
+    @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
+    private Set<Parent> parent = new HashSet<>();
 
     @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<Kyu> kyu = new HashSet<>();
@@ -51,29 +47,40 @@ public class Participant {
     //@JsonIgnore
     private ParticipantGroup participantGroup;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name="enrolledAttendance",
+            joinColumns = @JoinColumn(name = "participant_id"),
+            inverseJoinColumns = @JoinColumn(name = "attendance_id")
+    )
+    private Set<Attendance> enrolledAttendance = new HashSet<>();
     public Participant(){}
 
-    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> enrolledParents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parent, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.enrolledParents = enrolledParents;
+        this.parent = parent;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
+        this.participantGroup = participantGroup;
+        this.enrolledAttendance = enrolledAttendance;
     }
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> enrolledParents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups) {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parent, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.enrolledParents = enrolledParents;
+        this.parent = parent;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
+        this.participantGroup = participantGroup;
+        this.enrolledAttendance = enrolledAttendance;
     }
 
     public Long getId() {
@@ -124,12 +131,12 @@ public class Participant {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Parent> getEnrolledParents() {
-        return enrolledParents;
+    public Set<Parent> getParent() {
+        return parent;
     }
 
-    public void setEnrolledParents(Set<Parent> enrolledParents) {
-        this.enrolledParents = enrolledParents;
+    public void setParent(Set<Parent> parent) {
+        this.parent = parent;
     }
 
     public Set<Kyu> getKyu() {
@@ -148,12 +155,6 @@ public class Participant {
         this.physicalCheckups = physicalCheckups;
     }
 
-    public void enrolledParents(Parent parent) {
-        enrolledParents.add(parent);
-    }
-
-    public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
-
     public ParticipantGroup getParticipantGroup() {
         return participantGroup;
     }
@@ -161,13 +162,19 @@ public class Participant {
     public void setParticipantGroup(ParticipantGroup participantGroup) {
         this.participantGroup = participantGroup;
     }
+
+    public Set<Attendance> getEnrolledAttendance() {
+        return enrolledAttendance;
+    }
+
+    public void setEnrolledAttendance(Set<Attendance> enrolledAttendance) {
+        this.enrolledAttendance = enrolledAttendance;
+    }
+
+ public void enrolledAttendance(Attendance attendance) {
+       enrolledAttendance.add(attendance);
+   }
+
+   public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
+
 }
-/*
-{
-"imie":"test",
-"nazwisko":"test",
-"rokUrodzenia":"test",
-"email":"t@tesr",
-"numerTelefonu":"111-111-111"
-}
- */

@@ -40,7 +40,8 @@ public class ParentService {
         parentRepository.deleteById(id);}
 
     public void delete(Parent parent, Participant participant){
-        parent.getParticipantList().remove(participant);
-        participant.getEnrolledParents().remove(parent);
+       // parent.getParticipantList().remove(participant);
+        //participant.getEnrolledParents().remove(parent);
+        System.out.println("Delete parent");
     }
 }

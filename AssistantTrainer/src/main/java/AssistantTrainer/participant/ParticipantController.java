@@ -50,16 +50,16 @@ public class ParticipantController {
         return zawodnikService.updateZawodnik(zawodnik, id);
     }
 
-    @PutMapping("/{participantId}/parent/{parentId}")
-    public Participant enrollZawodnikToParent(
-            @PathVariable Long participantId,
-            @PathVariable Long parentId
-    ) {
-        Participant participant = zawodnikService.getOneZawodnik(participantId);
-        Parent parent = parentService.getOneParent(parentId);
-        participant.enrolledParents(parent);
-        return zawodnikService.save(participant);
-    }
+    //@PutMapping("/{participantId}/parent/{parentId}")
+    //public Participant enrollZawodnikToParent(
+    //        @PathVariable Long participantId,
+    //        @PathVariable Long parentId
+    //) {
+    //    Participant participant = zawodnikService.getOneZawodnik(participantId);
+    //    Parent parent = parentService.getOneParent(parentId);
+    //    participant.enrolledParents(parent);
+    //    return zawodnikService.save(participant);
+    //}
 
     @PutMapping("/{zawodnikId}/kyu/{kyuId}")
     public Kyu enrollZawodnikToKyu(

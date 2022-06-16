@@ -4,8 +4,6 @@ import AssistantTrainer.participant.Participant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table
@@ -28,8 +26,8 @@ public class Parent {
     Boolean contactAgree;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "enrolledParents")
-    private Set<Participant> participantList = new HashSet<>();
+    @ManyToOne
+    private Participant participant;
 
     public Parent() {}
 
@@ -98,12 +96,14 @@ public class Parent {
         this.contactAgree = contactAgree;
     }
 
-    public Set<Participant> getParticipantList() {
-        return participantList;
+    public Participant getParticipantList() {
+        return participant;
     }
 
-    public void setParticipantList(Set<Participant> participantList) {
-        this.participantList = participantList;
+    public void setParticipantList(Participant participant) {
+        this.participant = participant;
     }
+
+    public void assignParticipant(Participant participant) { this.participant = participant; }
 
 }
