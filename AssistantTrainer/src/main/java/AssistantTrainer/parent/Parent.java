@@ -96,11 +96,11 @@ public class Parent {
         this.contactAgree = contactAgree;
     }
 
-    public Participant getParticipantList() {
+    public Participant getParticipant() {
         return participant;
     }
 
-    public void setParticipantList(Participant participant) {
+    public void setParticipant(Participant participant) {
         this.participant = participant;
     }
 

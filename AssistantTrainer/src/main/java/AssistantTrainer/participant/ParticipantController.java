@@ -36,9 +36,7 @@ public class ParticipantController {
     }
 
     @GetMapping
-    public List<Participant> getZawodnik(){
-        return zawodnikService.getZawodnik();
-    }
+    public List<Participant> getZawodnik(){ return zawodnikService.getZawodnik(); }
 
     @PostMapping
     public void dodajZawodnika(@RequestBody Participant zawodnik){
@@ -50,16 +48,19 @@ public class ParticipantController {
         return zawodnikService.updateZawodnik(zawodnik, id);
     }
 
-    //@PutMapping("/{participantId}/parent/{parentId}")
-    //public Participant enrollZawodnikToParent(
-    //        @PathVariable Long participantId,
-    //        @PathVariable Long parentId
-    //) {
-    //    Participant participant = zawodnikService.getOneZawodnik(participantId);
-    //    Parent parent = parentService.getOneParent(parentId);
-    //    participant.enrolledParents(parent);
-    //    return zawodnikService.save(participant);
-    //}
+    @PutMapping("/{participantId}/parent/{parentId}")
+    public Parent enrollZawodnikToParent(
+            @PathVariable Long zawodnikId,
+            @PathVariable Long parentId
+    ) {
+        if(zawodnikService.findById(zawodnikId).isEmpty() || parentService.findById(parentId).isEmpty()){
+            throw new ApiRequestException("Nie można przypisać zawodnika do stopnia kyu");
+        }
+        Participant zawodnik = zawodnikService.getOneZawodnik(zawodnikId);
+        Parent parent = parentService.getOneParent(parentId);
+        parent.assignParticipant(zawodnik);
+        return parentService.save(parent);
+    }
 
     @PutMapping("/{zawodnikId}/kyu/{kyuId}")
     public Kyu enrollZawodnikToKyu(

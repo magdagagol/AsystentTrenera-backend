@@ -27,6 +27,16 @@ public class ParentController {
         return parentService.updateParent(parent, id);
    }
 
+   @PutMapping("/zawodnik/{zawodnikId}")
+   public Parent addParentToParticipant(
+            @PathVariable Long zawodnikId,
+            @RequestBody Parent parent
+    ) {
+        Participant participant = zawodnikService.getOneZawodnik(zawodnikId);
+        parent.assignParticipant(participant);
+        return parentService.save(parent);
+    }
+
    @PostMapping
    public void addParent(@RequestBody Parent parent){ parentService.addNewParent(parent); }
 

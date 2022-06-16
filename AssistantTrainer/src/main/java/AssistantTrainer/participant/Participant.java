@@ -6,7 +6,6 @@ import AssistantTrainer.kyu.Kyu;
 import AssistantTrainer.parent.Parent;
 import AssistantTrainer.physicalCheckup.PhysicalCheckup;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,7 +25,6 @@ public class Participant {
             generator = "participant_sequence"
     )
     private Long id;
-
     private String name;
     private String surname;
     private String yearOfBirth;
@@ -34,7 +32,7 @@ public class Participant {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
-    private Set<Parent> parent = new HashSet<>();
+    private Set<Parent> parents = new HashSet<>();
 
     @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<Kyu> kyu = new HashSet<>();
@@ -56,27 +54,27 @@ public class Participant {
     private Set<Attendance> enrolledAttendance = new HashSet<>();
     public Participant(){}
 
-    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parent, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.parent = parent;
+        this.parents = parents;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
         this.participantGroup = participantGroup;
         this.enrolledAttendance = enrolledAttendance;
     }
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parent, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.parent = parent;
+        this.parents = parents;
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
         this.participantGroup = participantGroup;
@@ -131,12 +129,12 @@ public class Participant {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Parent> getParent() {
-        return parent;
+    public Set<Parent> getParents() {
+        return parents;
     }
 
-    public void setParent(Set<Parent> parent) {
-        this.parent = parent;
+    public void setParents(Set<Parent> parents) {
+        this.parents = parents;
     }
 
     public Set<Kyu> getKyu() {
@@ -171,7 +169,7 @@ public class Participant {
         this.enrolledAttendance = enrolledAttendance;
     }
 
- public void enrolledAttendance(Attendance attendance) {
+    public void enrolledAttendance(Attendance attendance) {
        enrolledAttendance.add(attendance);
    }
 
