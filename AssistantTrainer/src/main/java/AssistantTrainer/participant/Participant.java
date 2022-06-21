@@ -45,6 +45,7 @@ public class Participant {
     //@JsonIgnore
     private ParticipantGroup participantGroup;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="enrolledAttendance",

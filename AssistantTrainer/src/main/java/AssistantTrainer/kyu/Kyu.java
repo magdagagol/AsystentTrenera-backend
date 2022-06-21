@@ -28,7 +28,6 @@ public class Kyu {
 
     @JsonIgnore
     @ManyToOne
-    //@JoinColumn(name = "participant_id")
     private Participant participant;
 
     public Kyu() {

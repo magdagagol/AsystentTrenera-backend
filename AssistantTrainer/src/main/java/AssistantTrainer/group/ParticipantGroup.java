@@ -1,5 +1,6 @@
 package AssistantTrainer.group;
 
+import AssistantTrainer.attendance.Attendance;
 import AssistantTrainer.participant.Participant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +30,13 @@ public class ParticipantGroup {
             cascade = CascadeType.ALL)
     //@JoinColumn(name = "group_id")
     private Set<Participant> participants = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "group",
+            cascade = CascadeType.ALL)
+    //@JoinColumn(name = "group_id")
+    private Set<Attendance> attendance = new HashSet<>();
 
     public Long getId() {
         return id;
