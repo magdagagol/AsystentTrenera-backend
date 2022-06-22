@@ -170,6 +170,10 @@ public class Participant {
        attendances.add(attendance);
    }
 
+    public void removeAttendance(Attendance attendance) {
+        attendances.remove(attendance);
+    }
+
    public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
 
 }

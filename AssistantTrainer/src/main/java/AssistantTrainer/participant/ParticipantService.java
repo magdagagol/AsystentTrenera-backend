@@ -1,6 +1,7 @@
 package AssistantTrainer.participant;
 
 
+import AssistantTrainer.attendance.Attendance;
 import AssistantTrainer.attendance.AttendanceRepository;
 import AssistantTrainer.group.ParticipantGroup;
 import org.springframework.beans.factory.annotation.Autowired;

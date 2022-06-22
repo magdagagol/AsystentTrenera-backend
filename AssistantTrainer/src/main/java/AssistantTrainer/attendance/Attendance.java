@@ -91,4 +91,8 @@ public class Attendance {
     public void enrolledParticipants(Participant participant) {
         participants.add(participant);
     }
+
+    public void removeParticipants(Participant participant) {
+        participants.remove(participant);
+    }
 }

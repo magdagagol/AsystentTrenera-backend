@@ -14,8 +14,8 @@ import AssistantTrainer.physicalCheckup.PhysicalCheckupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/zawodnik")
@@ -107,10 +107,22 @@ public class ParticipantController {
 
     @DeleteMapping("/{id}")
     public void usunZawodnika(@PathVariable Long id) {
+        //Participant participant = participantService.getOneZawodnik(id);
+        //Attendance attendance = attendanceService.getOneAttendance(id);//znaleźć wszystkie listy zawodnika
+       // participant.getattendances().remove(attendance);
+        //attendance.getParticipants().remove(participant);
+
+
         Participant participant = participantService.getOneZawodnik(id);
-        Attendance attendance = attendanceService.getOneAttendance(id);
-        participant.getattendances().remove(attendance);
-        attendance.getParticipants().remove(participant);
+        Set<Attendance> attendances = participant.getattendances();
+       // participant.removeAttendance(attendances);
+
+
+       participant.getattendances().forEach(p -> {
+           participant.getattendances().remove(p);
+           p.getParticipants().remove(participant);
+       });
+
         participantService.deleteById(id);
     }
 
