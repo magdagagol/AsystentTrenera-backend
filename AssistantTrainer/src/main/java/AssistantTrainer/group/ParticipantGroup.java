@@ -25,14 +25,12 @@ public class ParticipantGroup {
     private String name;
 
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "participantGroup")
+    @OneToMany(mappedBy = "participantGroup")
     //@JoinColumn(name = "group_id")
     private Set<Participant> participants = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "group")
+    @OneToMany(mappedBy = "group")
     //@JoinColumn(name = "group_id")
     private Set<Attendance> attendance = new HashSet<>();
 

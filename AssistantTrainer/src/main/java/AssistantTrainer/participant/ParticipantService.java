@@ -1,12 +1,11 @@
 package AssistantTrainer.participant;
 
 
+import AssistantTrainer.attendance.AttendanceRepository;
+import AssistantTrainer.group.ParticipantGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Part;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +14,7 @@ public class ParticipantService {
     private final ParticipantRepository zawodnikRepository;
 
     @Autowired
-    public ParticipantService(ParticipantRepository participantRepository) {
+    public ParticipantService(ParticipantRepository participantRepository, AttendanceRepository attendanceRepository) {
         this.zawodnikRepository = participantRepository;
     }
 
@@ -51,4 +50,5 @@ public class ParticipantService {
 
      public List<Participant> findParticipantWithGroup(Long id) { return zawodnikRepository.findParticipantWithGroup(id); }
      public List<Participant> findParticipantWithoutGroup(Long id) { return zawodnikRepository.findParticipantWithoutGroup(id); }
+
 }

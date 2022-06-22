@@ -40,7 +40,7 @@ public class Participant {
     @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "group_id", nullable = true)
     //@JsonIgnore
     private ParticipantGroup participantGroup;
