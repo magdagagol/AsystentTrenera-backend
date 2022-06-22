@@ -30,7 +30,7 @@ public class ParticipantGroup {
     private Set<Participant> participants = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     //@JoinColumn(name = "group_id")
     private Set<Attendance> attendance = new HashSet<>();
 

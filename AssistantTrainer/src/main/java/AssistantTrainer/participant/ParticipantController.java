@@ -117,10 +117,8 @@ public class ParticipantController {
         Set<Attendance> attendances = participant.getattendances();
        // participant.removeAttendance(attendances);
 
-
        participant.getattendances().forEach(p -> {
-           participant.getattendances().remove(p);
-           p.getParticipants().remove(participant);
+           p.removeParticipants(participant);
        });
 
         participantService.deleteById(id);

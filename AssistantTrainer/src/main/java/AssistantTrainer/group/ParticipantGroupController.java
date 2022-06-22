@@ -1,6 +1,5 @@
 package AssistantTrainer.group;
 
-import AssistantTrainer.participant.Participant;
 import AssistantTrainer.participant.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,17 +29,12 @@ public class ParticipantGroupController {
         return groupService.update(participantGroup, id);
     }
 
-/*    @PutMapping("/{groupId}/zawodnik/{participantId}")
-    public Participant addParticipantToGroup(
-            @PathVariable Long groupId,
-            @PathVariable Long participantId
-    ){
-        ParticipantGroup participantGroup = groupService.findById(groupId);
-        Participant participant = participantService.getOneZawodnik(participantId);
-        participant.setParticipantGroup(participantGroup);
-        return participantService.save(participant);
-    }
-*/
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){ groupService.delete(id); }
+    public void delete(@PathVariable Long id){
+        ParticipantGroup participantGroup = groupService.getOneGroup(id);
+        participantGroup.getParticipants().forEach(p -> {
+            p.setParticipantGroup(null);
+        });
+        groupService.delete(id);
+    }
 }
