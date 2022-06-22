@@ -2,12 +2,8 @@ package AssistantTrainer.attendance;
 
 import AssistantTrainer.group.ParticipantGroup;
 import AssistantTrainer.participant.Participant;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 
 import javax.persistence.*;
@@ -34,10 +30,18 @@ public class Attendance {
     @JsonDeserialize
     //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
     private Date date;
-
+/*
     //@JsonIgnore
     @ManyToMany(mappedBy = "enrolledAttendance")
     private Set<Participant> participantList = new HashSet<>();
+*/
+    @ManyToMany()
+    @JoinTable(
+            name="enrolledParticipant",
+            joinColumns = @JoinColumn(name = "participant_id"),
+            inverseJoinColumns = @JoinColumn(name = "attendance_id")
+    )
+    private Set<Participant> participants = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "group_id")
@@ -46,10 +50,10 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(Long id, Date date, Set<Participant> participantList) {
+    public Attendance(Long id, Date date, Set<Participant> participants) {
         this.id = id;
         this.date = date;
-        this.participantList = participantList;
+        this.participants = participants;
     }
 
     public Long getId() {
@@ -68,12 +72,12 @@ public class Attendance {
         this.date = date;
     }
 
-    public Set<Participant> getParticipantList() {
-        return participantList;
+    public Set<Participant> getParticipants() {
+        return participants;
     }
 
-    public void setParticipantList(Set<Participant> participantList) {
-        this.participantList = participantList;
+    public void setParticipants(Set<Participant> participants) {
+        this.participants = participants;
     }
 
     public ParticipantGroup getGroup() {
@@ -85,6 +89,6 @@ public class Attendance {
     }
 
     public void enrolledParticipants(Participant participant) {
-        participantList.add(participant);
+        participants.add(participant);
     }
 }

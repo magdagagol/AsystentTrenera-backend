@@ -26,13 +26,6 @@ public class AttendanceController {
     @GetMapping
     public List<Attendance> getAttendance(){ return attendanceService.getAttendance(); }
 
-    //@PostMapping()
-    //public void addNewAttendance(@RequestBody Attendance attendance){
-    //    System.out.println("attendance: " + attendance.getDate().toString());
-    //    System.out.println("date now: " + LocalDateTime.now());
-    //    attendanceService.save(attendance);
-    //}
-
     @PutMapping("/group/{groupId}")
     public Attendance addNewAttendance(
             @PathVariable Long groupId,
@@ -43,23 +36,20 @@ public class AttendanceController {
         return attendanceService.save(attendance);
     }
 
-    public Attendance updateAttendance(Attendance attendance, Long id) {
-        attendanceService.findById(id).map( atend -> {
-            atend.setDate(attendance.getDate());
-            return null;
-        });
-        return attendance;
-    }
-
-    @PutMapping("/{attendanceId}/ participant/{ participantId}")
+    @PutMapping("/{attendanceId}/participant/{participantId}")
     public Attendance enrollParticipantToAttendance(
             @PathVariable Long attendanceId,
-            @PathVariable Long  participantId
+            @PathVariable Long participantId
     ) {
         Attendance attendance = attendanceService.getOneAttendance(attendanceId);
         Participant participant = participantService.getOneZawodnik(participantId);
         attendance.enrolledParticipants(participant);
         return attendanceService.save(attendance);
+    }
+
+    @PostMapping("/{id}")
+    public Attendance update(@RequestBody Attendance attendance, @PathVariable Long id){
+        return attendanceService.updateAttendance(attendance, id);
     }
 
     @DeleteMapping("/{id}")

@@ -26,15 +26,13 @@ public class ParticipantGroup {
 
     @JsonIgnore
     @OneToMany(
-            mappedBy = "participantGroup",
-            cascade = CascadeType.ALL)
+            mappedBy = "participantGroup")
     //@JoinColumn(name = "group_id")
     private Set<Participant> participants = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(
-            mappedBy = "group",
-            cascade = CascadeType.ALL)
+            mappedBy = "group")
     //@JoinColumn(name = "group_id")
     private Set<Attendance> attendance = new HashSet<>();
 

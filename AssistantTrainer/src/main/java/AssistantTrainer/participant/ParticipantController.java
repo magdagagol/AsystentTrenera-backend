@@ -26,14 +26,16 @@ public class ParticipantController {
     private final PhysicalCheckupService physicalCheckupService;
     private final ParticipantGroupService participantGroupService;
 
+    private final AttendanceService attendanceService;
 
     @Autowired
-    public ParticipantController(ParticipantService  participantService, KyuService kyuService, PhysicalCheckupService physicalCheckupService, ParentService parentService, ParticipantGroupService participantGroupService) {
+    public ParticipantController(ParticipantService  participantService, KyuService kyuService, PhysicalCheckupService physicalCheckupService, ParentService parentService, ParticipantGroupService participantGroupService, AttendanceService attendanceService) {
         this. participantService =  participantService;
         this.kyuService = kyuService;
         this.physicalCheckupService = physicalCheckupService;
         this.parentService = parentService;
         this.participantGroupService = participantGroupService;
+        this.attendanceService = attendanceService;
     }
 
     @GetMapping

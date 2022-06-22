@@ -40,22 +40,18 @@ public class Participant {
     @OneToMany(mappedBy = "participant", cascade=CascadeType.ALL)
     private Set<PhysicalCheckup> physicalCheckups = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "group_id", nullable = true)
     //@JsonIgnore
     private ParticipantGroup participantGroup;
 
     @JsonIgnore
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name="enrolledAttendance",
-            joinColumns = @JoinColumn(name = "participant_id"),
-            inverseJoinColumns = @JoinColumn(name = "attendance_id")
-    )
-    private Set<Attendance> enrolledAttendance = new HashSet<>();
+    @ManyToMany(mappedBy = "participants")
+    private Set<Attendance> attendances = new HashSet<>();
+
     public Participant(){}
 
-    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> attendances) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -66,10 +62,10 @@ public class Participant {
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
         this.participantGroup = participantGroup;
-        this.enrolledAttendance = enrolledAttendance;
+        this.attendances = attendances;
     }
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> enrolledAttendance) {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, Set<Parent> parents, Set<Kyu> kyu, Set<PhysicalCheckup> physicalCheckups, ParticipantGroup participantGroup, Set<Attendance> attendances) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
@@ -79,7 +75,7 @@ public class Participant {
         this.kyu = kyu;
         this.physicalCheckups = physicalCheckups;
         this.participantGroup = participantGroup;
-        this.enrolledAttendance = enrolledAttendance;
+        this.attendances = attendances;
     }
 
     public Long getId() {
@@ -162,16 +158,16 @@ public class Participant {
         this.participantGroup = participantGroup;
     }
 
-    public Set<Attendance> getEnrolledAttendance() {
-        return enrolledAttendance;
+    public Set<Attendance> getattendances() {
+        return attendances;
     }
 
-    public void setEnrolledAttendance(Set<Attendance> enrolledAttendance) {
-        this.enrolledAttendance = enrolledAttendance;
+    public void setattendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
     }
 
     public void enrolledAttendance(Attendance attendance) {
-       enrolledAttendance.add(attendance);
+       attendances.add(attendance);
    }
 
    public void assignKyu(Kyu kyu) { this.kyu.add(kyu); }
