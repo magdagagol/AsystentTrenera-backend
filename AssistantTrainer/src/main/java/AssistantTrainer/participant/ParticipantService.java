@@ -7,8 +7,11 @@ import AssistantTrainer.group.ParticipantGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipantService {
@@ -51,5 +54,4 @@ public class ParticipantService {
 
      public List<Participant> findParticipantWithGroup(Long id) { return zawodnikRepository.findParticipantWithGroup(id); }
      public List<Participant> findParticipantWithoutGroup(Long id) { return zawodnikRepository.findParticipantWithoutGroup(id); }
-
 }

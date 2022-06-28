@@ -106,16 +106,8 @@ public class ParticipantController {
     }
 
     @DeleteMapping("/{id}")
-    public void usunZawodnika(@PathVariable Long id) {
-        //Participant participant = participantService.getOneZawodnik(id);
-        //Attendance attendance = attendanceService.getOneAttendance(id);//znaleźć wszystkie listy zawodnika
-       // participant.getattendances().remove(attendance);
-        //attendance.getParticipants().remove(participant);
-
-
-        Participant participant = participantService.getOneZawodnik(id);
-        Set<Attendance> attendances = participant.getattendances();
-       // participant.removeAttendance(attendances);
+    public void removeParticipant(@PathVariable Long id) {
+       Participant participant = participantService.getOneZawodnik(id);
 
        participant.getattendances().forEach(p -> {
            p.removeParticipants(participant);
